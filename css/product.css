@@ -1,0 +1,226 @@
+/* ปุ่ม toggle filter */
+.product-page .filter-toggle {
+  display: none; /* ซ่อนบน desktop */
+  background: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* มือถือ/Tablet */
+@media (max-width: 900px) {
+  .product-page .filter-toggle {
+    display: block;
+  }
+
+  .product-page .filter {
+    max-width: 100%;
+    margin-bottom: 20px;
+
+    /* 👇 animation แบบ slide */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .product-page .filter.active {
+    max-height: 500px; /* สูงพอที่จะโชว์ */
+    opacity: 1;
+    padding: 20px;
+  }
+
+  .product-page .container {
+    flex-direction: column;
+  }
+}
+
+/* Layout หลัก: filter ซ้าย, products ขวา */
+.product-page .container {
+  display: flex;
+  max-width: 1600px; /* 👈 เดิม 1200px → เพิ่มพื้นที่รวม */
+  margin: 20px auto;
+  gap: 25px;
+  padding: 0 30px; /* padding ข้างในเยอะขึ้นนิดหน่อย */
+}
+
+/* Sidebar Filter */
+.product-page .filter {
+  flex: 1;
+  max-width: 250px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-page .filter h2 {
+  margin-bottom: 15px;
+  color: #007bff;
+  font-size: 1.4rem;
+}
+
+.product-page .filter h3 {
+  margin: 15px 0 8px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.product-page .filter .search-box input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+/* Checkbox สวยขึ้น */
+.product-page .filter label {
+  display: block;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.product-page .filter input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Products */
+.product-page .products {
+  flex: 3;
+}
+
+.product-page .products h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+/* Products Grid */
+.product-page .product-grid {
+  display: grid;
+  gap: 35px; /* ช่องว่างกว้างขึ้นให้ไม่อึดอัด */
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+/* การ์ดสินค้า */
+.product-page .product-card {
+  background: #fff;
+  border-radius: 16px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-page .product-card img {
+  width: 100%;
+  aspect-ratio: 4/3;   /* 👈 กำหนดสัดส่วน */
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: transform 0.4s ease;
+}
+
+/* รูป zoom-in ตอน hover */
+.product-page .product-card:hover img {
+  transform: scale(1.08);
+}
+
+/* ข้อความและปุ่ม */
+.product-page .product-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+.product-page .product-card p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 12px;
+}
+.product-page .product-card button {
+  font-size: 1rem;
+  padding: 10px 18px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+.product-page .product-card button:hover {
+  background: #0056b3;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* การ์ดลอยขึ้น */
+.product-page .product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.18);
+}
+
+/* Responsive Grid */
+@media (max-width: 600px) {
+  /* 📱 มือถือ */
+  .product-page .container {
+    flex-direction: column; /* Sidebar ขึ้นไปอยู่บน */
+  }
+
+  .product-page .filter {
+    max-width: 100%;
+    margin-bottom: 20px; /* เว้นระยะจาก products */
+  }
+
+  .product-page .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  /* 📲 Tablet */
+  .product-page .container {
+    flex-direction: column; /* filter อยู่บน */
+  }
+
+  .product-page .filter {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .product-page .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+  /* 💻 Laptop */
+  .product-page .container {
+    flex-direction: row; /* filter กลับมาซ้าย */
+  }
+
+  .product-page .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1201px) {
+  /* 🖥️ Desktop */
+  .product-page .container {
+    flex-direction: row; /* filter ซ้าย */
+  }
+
+  .product-page .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

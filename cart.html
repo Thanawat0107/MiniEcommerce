@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ตะกร้าสินค้า - Mini E-commerce</title>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Cart Page CSS -->
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html">หน้าแรก</a>
+      <a href="product.html">สินค้า</a>
+      <a href="cart.html" class="active">ตะกร้า</a>
+    </nav>
+  </header>
+
+  <!-- 👇 ครอบด้วย cart-page -->
+  <section class="cart-page">
+    <!-- Main -->
+    <main class="cart-container">
+      <!-- รายการสินค้า -->
+      <section class="cart-items">
+        <h2>🛒 ตะกร้าสินค้า</h2>
+
+        <div class="cart-item">
+          <img src="https://cdn.pixabay.com/photo/2017/09/04/18/39/coffee-2714970_1280.jpg" alt="เสื้อยืด">
+          <div class="item-info">
+            <h3>เสื้อยืด</h3>
+            <p>200฿</p>
+            <div class="quantity">
+              <button>-</button>
+              <input type="text" value="1" readonly>
+              <button>+</button>
+            </div>
+          </div>
+          <div class="item-total">200฿</div>
+        </div>
+
+        <div class="cart-item">
+          <img src="https://cdn.pixabay.com/photo/2012/03/01/15/54/coffee-20486_1280.jpg" alt="หมวก">
+          <div class="item-info">
+            <h3>หมวก</h3>
+            <p>150฿</p>
+            <div class="quantity">
+              <button>-</button>
+              <input type="text" value="2" readonly>
+              <button>+</button>
+            </div>
+          </div>
+          <div class="item-total">300฿</div>
+        </div>
+      </section>
+
+      <!-- สรุปการสั่งซื้อ -->
+      <aside class="cart-summary">
+        <h2>สรุปการสั่งซื้อ</h2>
+
+        <div class="summary-items">
+          <div class="summary-item">
+            <img src="https://cdn.pixabay.com/photo/2017/09/04/18/39/coffee-2714970_1280.jpg" alt="เสื้อยืด">
+            <p>เสื้อยืด x1</p>
+            <span>200฿</span>
+          </div>
+          <div class="summary-item">
+            <img src="https://cdn.pixabay.com/photo/2012/03/01/15/54/coffee-20486_1280.jpg" alt="หมวก">
+            <p>หมวก x2</p>
+            <span>300฿</span>
+          </div>
+        </div>
+
+        <hr>
+        <p>รวมสินค้า: 500฿</p>
+        <p>ค่าจัดส่ง: 50฿</p>
+        <hr>
+        <p class="total"><strong>ยอดรวม: 550฿</strong></p>
+        <button class="checkout-btn">ดำเนินการชำระเงิน</button>
+      </aside>
+    </main>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Mini E-Commerce</p>
+  </footer>
+</body>
+</html>
