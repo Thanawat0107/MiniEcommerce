@@ -1,3 +1,15 @@
+/* ข้อความตะกร้าว่าง */
+.cart-items .empty {
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+  margin: 40px 0;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
+
 /* -------------------- */
 /* Layout หลัก */
 .cart-page .cart-container {
