@@ -21,18 +21,19 @@
 
     <!-- Main Layout -->
     <main class="container">
+      
       <!-- Filter Sidebar -->
-      <aside class="filter" id="filterBox">
-        <h2>กรองสินค้า</h2>
-        <div class="search-box">
-          <input type="text" placeholder="🔍 ค้นหาสินค้า...">
-        </div>
-        <h3>หมวดหมู่</h3>
-        <label><input type="checkbox"> ทั้งหมด</label><br>
-        <label><input type="checkbox"> กาแฟ</label><br>
-        <label><input type="checkbox"> ขนม</label><br>
-        <label><input type="checkbox"> ตุ๊กกระตา</label><br>
-      </aside>
+    <aside class="filter" id="filterBox">
+      <h2>กรองสินค้า</h2>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 ค้นหาสินค้า...">
+      </div>
+      <h3>หมวดหมู่</h3>
+      <label><input type="checkbox" name="category" value="ทั้งหมด" checked> ทั้งหมด</label><br>
+      <label><input type="checkbox" name="category" value="กาแฟ"> กาแฟ</label><br>
+      <label><input type="checkbox" name="category" value="ขนมหวาน"> ขนม</label><br>
+      <label><input type="checkbox" name="category" value="ตุ๊กตา"> ตุ๊กตา</label><br>
+    </aside>
 
       <!-- Product List -->
       <section class="products">
@@ -53,6 +54,7 @@
   </script>
 
   <script src="js/products.js"></script>
+  <script src="js/cart.js"></script> <!-- ต้องมี updateCartCount อยู่ในนี้ -->
   <script src="js/include.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   

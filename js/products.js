@@ -102,25 +102,99 @@ var products = [
   },
 ];
 
+// ตัวแปรเก็บค่า filter
+let searchTerm = "";
+let selectedCategories = ["ทั้งหมด"];
+
 function renderProducts() {
   const productList = document.getElementById("productList");
 
-  productList.innerHTML = products.map(p => `
-    <div class="product-card" data-category="${p.category}">
-      <img src="${p.image}" alt="${p.name}">
-      <h3>${p.name}</h3>
-      <p class="category">หมวดหมู่: ${p.category}</p>
-      <p><strong>${p.price}฿</strong></p>
-      <button onclick="addToCart(${p.id})">🛒 หยิบใส่ตะกร้า</button>
-    </div>
-  `).join("");
+  let filtered = products.filter((p) => {
+    // ทำ string รวมทุก field ที่อยากให้ค้นหา
+    const productText = `
+      ${p.name} 
+      ${p.category} 
+      ${p.price}
+    `.toLowerCase();
+
+    // filter คำค้นหา (match ในทุก field)
+    const matchSearch = productText.includes(searchTerm.toLowerCase());
+
+    // filter หมวดหมู่
+    const matchCategory =
+      selectedCategories.includes("ทั้งหมด") ||
+      selectedCategories.includes(p.category);
+
+    return matchSearch && matchCategory;
+  });
+
+  if (filtered.length === 0) {
+    productList.innerHTML = `<p style="text-align:center;color:#888">ไม่พบสินค้าที่ค้นหา</p>`;
+    return;
+  }
+
+  productList.innerHTML = filtered
+    .map(
+      (p) => `
+      <div class="product-card" data-category="${p.category}">
+        <img src="${p.image}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p class="category">หมวดหมู่: ${p.category}</p>
+        <p><strong>${p.price}฿</strong></p>
+        <button onclick="addToCart(${p.id})">🛒 หยิบใส่ตะกร้า</button>
+      </div>
+    `
+    )
+    .join("");
+}
+
+// ฟังก์ชัน setup event
+function setupFilters() {
+  const searchInput = document.getElementById("searchInput");
+  searchInput.addEventListener("input", (e) => {
+    searchTerm = e.target.value;
+    renderProducts();
+  });
+
+  const checkboxes = document.querySelectorAll("input[name='category']");
+  checkboxes.forEach((cb) => {
+    cb.addEventListener("change", () => {
+      if (cb.value === "ทั้งหมด" && cb.checked) {
+        // 👉 ถ้าเลือก "ทั้งหมด" ให้ติ๊กแค่ "ทั้งหมด" อันเดียว
+        checkboxes.forEach((c) => {
+          if (c.value !== "ทั้งหมด") c.checked = false;
+        });
+        selectedCategories = ["ทั้งหมด"];
+      } else {
+        // 👉 ถ้าเลือกหมวดหมู่อื่น → ยกเลิก "ทั้งหมด"
+        const otherChecked = Array.from(checkboxes).filter(
+          (c) => c.value !== "ทั้งหมด" && c.checked
+        );
+
+        if (otherChecked.length > 0) {
+          checkboxes.forEach((c) => {
+            if (c.value === "ทั้งหมด") c.checked = false;
+          });
+          selectedCategories = otherChecked.map((c) => c.value);
+        } else {
+          // ถ้าไม่เลือกอะไรเลย → default กลับไป "ทั้งหมด"
+          checkboxes.forEach((c) => {
+            if (c.value === "ทั้งหมด") c.checked = true;
+          });
+          selectedCategories = ["ทั้งหมด"];
+        }
+      }
+
+      renderProducts();
+    });
+  });
 }
 
 // ฟังก์ชันเพิ่มลงตะกร้า
 function addToCart(id) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let product = products.find(p => p.id === id);
-  let item = cart.find(c => c.id === id);
+  let product = products.find((p) => p.id === id);
+  let item = cart.find((c) => c.id === id);
 
   if (item) {
     item.qty++;
@@ -129,22 +203,26 @@ function addToCart(id) {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
- // แจ้งเตือนแบบสวย ๆ
+
+  // แจ้งเตือนแบบสวย ๆ ด้วย SweetAlert2
   Swal.fire({
     title: "เพิ่มลงตะกร้าแล้ว!",
     text: `${product.name} ถูกเพิ่มลงตะกร้าเรียบร้อย`,
     icon: "success",
-    confirmButtonText: "ตกลง",
     timer: 1500,
     showConfirmButton: false,
     toast: true,
-    position: "top-end"
+    position: "top-end",
   });
 
-  updateCartCount();
+  // อัปเดต badge ตะกร้า
+  if (typeof updateCartCount === "function") {
+    updateCartCount();
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   renderProducts();
+  setupFilters();
   updateCartCount();
 });

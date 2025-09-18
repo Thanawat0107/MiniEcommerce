@@ -65,6 +65,7 @@ function updateQty(index, change) {
     cart[index].qty += change;
   }
   showCart();
+  updateCartCount(); // ✅ อัปเดตตัวเลข header ด้วย
 }
 
 function updateCartCount() {
@@ -79,6 +80,33 @@ function updateCartCount() {
     cartCount.classList.add("bump");
     setTimeout(() => cartCount.classList.remove("bump"), 400);
   }
+}
+
+function checkout() {
+  if (cart.length === 0) {
+    Swal.fire({
+      title: "ตะกร้าว่าง!",
+      text: "กรุณาเลือกสินค้าใส่ตะกร้าก่อนชำระเงิน",
+      icon: "warning",
+      confirmButtonText: "ตกลง"
+    });
+    return;
+  }
+
+  // ล้างตะกร้า
+  cart = [];
+  localStorage.removeItem("cart");
+  showCart();
+  updateCartCount();
+
+  // แจ้งเตือนชำระเงินสำเร็จ
+  Swal.fire({
+    title: "ชำระเงินสำเร็จ!",
+    text: "ขอบคุณที่ใช้บริการ 😊",
+    icon: "success",
+    confirmButtonText: "ตกลง",
+    timer: 2000
+  });
 }
 
 // โหลด cart ตอนเปิดหน้า

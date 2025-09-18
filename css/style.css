@@ -8,12 +8,14 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f9fafb;
-  color: #333;
-  line-height: 1.6;
-}
+    color: #333;
+    line-height: 1.6; /* ปรับ spacing ของเนื้อหาข้างล่าง ให้ไม่โดน header ทับ */
+    margin: 0;
+    padding-top: 70px; /* ต้องมากกว่าความสูงของ header */
+  }
 
 /* Navbar */
-.navbar {
+/* .navbar {
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -28,10 +30,10 @@ body {
 }
 .navbar a:hover {
   text-decoration: underline;
-}
+} */
 
 /* Footer */
-footer {
+/* footer {
   text-align: center;
   padding: 20px;
   margin-top: 40px;
@@ -39,7 +41,7 @@ footer {
   border-top: 1px solid #ddd;
   font-size: 0.9rem;
   color: #555;
-}
+} */
 
 #cartCount {
   background: red;

@@ -12,17 +12,29 @@ function renderHighlightProducts() {
   const randomProducts = getRandomItems(products, 4);
 
   // แสดงผล
-  highlightBox.innerHTML = randomProducts.map(p => `
+  highlightBox.innerHTML = randomProducts
+    .map(
+      (p) => `
     <div class="product-card">
       <img src="${p.image}" alt="${p.name}">
       <h3>${p.name}</h3>
-      <p>${p.price}฿</p>
-      <small>${p.category}</small>
+       <p class="category">หมวดหมู่: ${p.category}</p>
+        <p><strong>${p.price}฿</strong></p>
+        <button onclick="addToCart(${p.id})">🛒 หยิบใส่ตะกร้า</button>
     </div>
-  `).join("");
+  `
+    )
+    .join("");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   renderHighlightProducts();
-  updateCartCount();
+  
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
 });
+

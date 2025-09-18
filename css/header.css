@@ -1,21 +1,75 @@
-.header {
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: linear-gradient(to right, #4facfe, #00f2fe);
   padding: 1rem;
-  text-align: center;
-  color: white;
-}
-.header nav a {
-  margin: 0 10px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-}
-.header nav a:hover {
-  text-decoration: underline;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.navbar a.active {
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
   font-weight: bold;
-  color: #2563eb; /* สีน้ำเงิน Tailwind */
-  border-bottom: 2px solid #2563eb;
+  color: white;
+  font-size: 18px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+/* ปุ่ม ☰ */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #4facfe;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
 }
