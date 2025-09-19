@@ -221,6 +221,11 @@ function addToCart(id) {
   }
 }
 
+ function toggleFilter() {
+   const filterBox = document.getElementById("filterBox");
+   filterBox.classList.toggle("active");
+ }
+
 document.addEventListener("DOMContentLoaded", () => {
   renderProducts();
   setupFilters();

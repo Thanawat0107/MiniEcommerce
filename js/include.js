@@ -1,14 +1,24 @@
 function include(id, file) {
-  fetch(file).then(r => r.text()).then(html => {
-    document.getElementById(id).innerHTML = html;
+  fetch(file)
+    .then(r => r.text())
+    .then(html => {
+      document.getElementById(id).innerHTML = html;
 
-     // ✅ ถ้าเป็น header.html ให้ update counter หลังโหลดเสร็จ
-    if (file.includes("header")) {
-      if (typeof updateCartCount === "function") {
-        updateCartCount();
+      if (file.includes("header")) {
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+
+        if (menuToggle && navLinks) {
+          menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+          });
+        }
+
+        if (typeof updateCartCount === "function") {
+          updateCartCount();
+        }
       }
-    }
-  });
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
